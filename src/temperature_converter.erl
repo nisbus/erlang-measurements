@@ -14,7 +14,7 @@
 %%%===================================================================
 %%% API
 %%%===================================================================
-convert(ToTemp,FromTemp,Value) ->
+convert(FromTemp,ToTemp,Value) ->
     To = list_to_atom(ToTemp),
     From = list_to_atom(FromTemp),
     case From of

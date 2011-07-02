@@ -1,10 +1,10 @@
 A measurement converter for erlang.  
   
-Currently supports temperature, volume and distance conversions.  
+Currently supports temperature, volume, distance, cooking and forex (thanks google) conversions.  
   
 HOW TO USE:  
   
-measurements:convert(ToMeasurement, FromMeasurement, Value).  
+measurements:convert(FromMeasurement, ToMeasurement, Value).  
   
 To and From measurements can be abbreviations, names and plurals either as atoms or strings.  
   
