@@ -1,0 +1,12 @@
+{application, measurements,
+ [
+  {description, "Measurement conversion module for Erlang"},
+  {vsn, "0.1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { convert_app, []}},
+  {env, []}
+ ]}.
