@@ -16,7 +16,7 @@
 %%%===================================================================
 convert(From,To,Value) ->
     inets:start(),
-    case httpc:request("http://www.google.is/search?aq=f&sourceid=chrome&ie=UTF-8&q="++From++"+in+"++To) of 
+    case httpc:request("http://www.google.com/search?aq=f&ie=UTF-8&q="++From++"+in+"++To) of 
 	{ok,{_Status, _H, Body}} ->
 	    Sub = string:substr(Body,string:str(Body," = ")+3,100),
 	    case catch list_to_float(string:substr(Sub,1,string:str(Sub," ")-1)) of
