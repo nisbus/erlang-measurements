@@ -3,6 +3,7 @@
 %%========================================================================
 -define(measurement_table,
 	[
+         {"unit","units","unit",undefined,1},
 	 {"angstrom", "angstroms", "angstrom",distance, 10000000},
 	 {"nanometer", "nanometers", "nm",distance, 1000000},
 	 {"micrometer", "micrometers", "micron",distance, 1000},
