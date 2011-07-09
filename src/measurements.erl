@@ -18,31 +18,35 @@
 %%%===================================================================
 %%% API
 %%%===================================================================
-convert(To,From,Value) when is_atom(To),is_atom(From) ->
-    convert(atom_to_list(To),atom_to_list(From),Value);
+convert(From,To,Value) when is_atom(To),is_atom(From) ->
+    convert(atom_to_list(From),atom_to_list(To),Value);
 convert(From,To,Value) ->
-    case get_measurement(To) of	
-	{ToName, _ToPlural, _ToAbb, ToType, ToValue} ->
-	    case get_measurement(From) of
-		{FromName, _FromPlural, _FromAbb, FromType, FromValue} ->
-		    case ToType == FromType of
-			true ->	    
-			    case ToType of
-				temperature ->
-				    temperature_converter:convert(FromName, ToName,Value);
-				forex ->
-				    google_forex_converter:convert(FromName,ToName,Value);
-				_ ->
-				    (ToValue/FromValue)*Value
-			    end;
-			false ->
-			    {error, "cannot convert "++atom_to_list(ToType)++" to "++atom_to_list(FromType)}
-		    end;
-		{error,Error} ->
-		    Error
-	    end;
-	{error, Error} ->
-	    Error
+    case From =:= To of
+        true -> Value;
+        false ->    
+            case get_measurement(To) of	
+	        {ToName, _ToPlural, _ToAbb, ToType, ToValue} ->
+	            case get_measurement(From) of
+		        {FromName, _FromPlural, _FromAbb, FromType, FromValue} ->
+		            case ToType == FromType of
+			        true ->	    
+			            case ToType of
+				        temperature ->
+				            temperature_converter:convert(FromName, ToName,Value);
+				    forex ->
+				        google_forex_converter:convert(FromName,ToName,Value);
+				    _ ->
+				       (ToValue/FromValue)*Value
+			        end;
+			        false ->
+			            {error, "cannot convert "++atom_to_list(ToType)++" to "++atom_to_list(FromType)}
+		            end;
+		        {error,Error} ->
+		            Error
+	            end;
+	        {error, Error} ->
+	            Error
+            end
     end.
 
 list_measurements() ->
