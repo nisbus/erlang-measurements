@@ -1,0 +1,3 @@
+{application,measurements}.
+{packages,[]}.
+{modules,[google_forex_converter,measurements,temperature_converter]}.
