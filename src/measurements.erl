@@ -2,7 +2,9 @@
 %%% @author nisbus <nisbus@gmail.com>
 %%% @copyright (C) 2011, 
 %%% @doc
-%%%
+%%%  Measurement converter for Erlang applications.
+%%%  Supported measurement types are temerature, currency and 
+%%%  metric/imperial conversions.
 %%% @end
 %%% Created :  1 Jul 2011 by  nisbus <nisbus@gmail.com>
 %%%-------------------------------------------------------------------
@@ -18,6 +20,10 @@
 %%%===================================================================
 %%% API
 %%%===================================================================
+%%% @doc
+%%%  Converts a value from one measurement to another
+%%% @end
+-spec convert(From :: atom(), To :: atom(), Value :: integer()|float()) -> integer()|float()|{error,string()}.
 convert(From,To,Value) when is_atom(To),is_atom(From) ->
     convert(atom_to_list(From),atom_to_list(To),Value);
 convert(From,To,Value) ->
@@ -49,18 +55,40 @@ convert(From,To,Value) ->
             end
     end.
 
+%%% @doc
+%%% Returns the measurements table with all available measurement types
+%%% @end
+-spec list_measurements() -> [atom()].
 list_measurements() ->
     ?measurement_table.
+
+%%% @doc
+%%%  Lists all measurement types.
+%%% @end
+-spec list_measurement_types() -> [atom()].
 list_measurement_types() ->
    lists:usort([Type || {_,_,_,Type,_} <- ?measurement_table]).
 
+%%% @doc
+%%%  Returns all measurements of a particular type
+%%% @end
+-spec list_measurements_by_type(Type :: atom()) -> [atom()].
 list_measurements_by_type(Type) when is_atom(Type) ->
    lists:usort([M || {M,_,_,T,_} <- ?measurement_table, T =:= Type]);
 list_measurements_by_type(Type) when is_list(Type) ->
     list_measurements_by_type(list_to_atom(Type)).
 
+%%% @doc
+%%%   lists the abbreviations for all measurements.
+%%% @end
+-spec list_abbreviations() -> [atom()].
 list_abbreviations() ->
     [A || {_,_,A,_,_} <- ?measurement_table].
+
+%%% @doc
+%%%   lists the abbreviations for all measurements for a particular type.
+%%% @end
+-spec list_abbreviations_by_type(Type :: atom()) -> [atom()].
 list_abbreviations_by_type(Type) when is_atom(Type)->
    lists:usort([A || {_,_,A,T,_} <- ?measurement_table, T =:= Type]);
 list_abbreviations_by_type(Type) when is_list(Type) ->
@@ -70,6 +98,7 @@ list_abbreviations_by_type(Type) when is_list(Type) ->
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+%%% @hidden
 get_measurement(Measurement) ->
     case [ {Name, Plural, Abbreviation, Type, Value} || {Name, Plural, Abbreviation, Type, Value} <- ?measurement_table,lists:member(Measurement,[Name,Plural,Abbreviation]) ] of
 	[] ->

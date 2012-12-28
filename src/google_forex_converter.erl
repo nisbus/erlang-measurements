@@ -1,8 +1,9 @@
 %%%-------------------------------------------------------------------
-%%% @author nisbus  <nisbus@gmail.com>
-%%% @copyright (C) 2011, 
+%%% @author nisbus <nisbus@gmail.com>
+%%% @copyright nisbus (C) 2011, 
 %%% @doc
-%%%
+%%%   A simple forex converter that calls google search for 
+%%%   conversion rates
 %%% @end
 %%% Created :  2 Jul 2011 by  nisbus  <nisbus@gmail.com>
 %%%-------------------------------------------------------------------
@@ -10,10 +11,14 @@
 
 %% API
 -export([convert/3]).
-
 %%%===================================================================
 %%% API
 %%%===================================================================
+%%% @doc
+%%%  Converts a currency value from one currency to another.
+%%% @end
+-spec convert(From :: string(), To :: string(), Value :: float() | integer()) -> 
+		     float() | integer() | {error, currency_not_found}.
 convert(From,To,Value) ->
     inets:start(),
     case httpc:request("http://www.google.com/search?aq=f&ie=UTF-8&q="++From++"+in+"++To) of 

@@ -14,6 +14,9 @@
 %%%===================================================================
 %%% API
 %%%===================================================================
+%%% @doc
+%%%  Converts a temperature value from one scale to another.
+%%% @end
 -spec convert(FromTemp :: celcius | fahrenheit| kelvin | rankine | delisle | newton |reaumur|romer,
 	      ToTemp :: celcius | fahrenheit| kelvin | rankine | delisle | newton |reaumur|romer,
 	      Value :: integer() | float()) -> 
@@ -55,7 +58,7 @@ convert(FromTemp,ToTemp,Value) ->
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
-
+%%% @hidden
 convert_celcius(To,Value) ->
     case To of
 	celcius ->
@@ -78,6 +81,7 @@ convert_celcius(To,Value) ->
 	    {error, unknown_measurement}
     end.
 
+%%% @hidden
 convert_fahrenheit(To,Value) ->
     case To of
 	celcius ->
@@ -100,6 +104,7 @@ convert_fahrenheit(To,Value) ->
 	    {error, unknown_measurement}
     end.
     
+%%% @hidden
 convert_kelvin(To,Value) ->
     case To of
 	celcius ->
@@ -122,6 +127,7 @@ convert_kelvin(To,Value) ->
 	    {error, unknown_measurement}
     end.
     
+%%% @hidden
 convert_rankine(To,Value) ->
     case To of
 	celcius ->
@@ -144,6 +150,7 @@ convert_rankine(To,Value) ->
 	    {error, unknown_measurement}
     end.
 
+%%% @hidden
 convert_delisle(To,Value) ->
     case To of
 	celcius ->
@@ -166,6 +173,7 @@ convert_delisle(To,Value) ->
 	    {error, unknown_measurement}
     end.
 
+%%% @hidden
 convert_newton(To,Value) ->
     case To of
 	celcius ->
@@ -188,6 +196,7 @@ convert_newton(To,Value) ->
 	    {error, unknown_measurement}
     end.
 
+%%% @hidden
 convert_reaumur(To,Value) ->
     case To of
 	celcius ->
@@ -210,6 +219,7 @@ convert_reaumur(To,Value) ->
 	    {error, unknown_measurement}
     end.
 
+%%% @hidden
 convert_romer(To,Value) ->
     case To of
 	celcius ->
