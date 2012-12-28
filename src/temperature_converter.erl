@@ -1,8 +1,9 @@
 %%%-------------------------------------------------------------------
 %%% @author  nisbus <nisbus@gmail.com>
-%%% @copyright (C) 2011, 
+%%% @copyright nisbus (C) 2011, 
 %%% @doc
-%%%
+%%%    Converts temerature values from one scale to another.
+%%%    See convert for supported scales.
 %%% @end
 %%% Created :  2 Jul 2011 by  nisbus <nisbus@gmail.com>
 %%%-------------------------------------------------------------------
@@ -10,10 +11,23 @@
 
 %% API
 -export([convert/3]).
-
 %%%===================================================================
 %%% API
 %%%===================================================================
+-spec convert(FromTemp :: celcius | fahrenheit| kelvin | rankine | delisle | newton |reaumur|romer,
+	      ToTemp :: celcius | fahrenheit| kelvin | rankine | delisle | newton |reaumur|romer,
+	      Value :: integer() | float()) -> 
+		     integer() | float() | {error, unknown_measurement}.	     
+convert(FromTemp,ToTemp,Value) when is_binary(FromTemp) and is_binary(ToTemp) ->
+    To = binary_to_list(FromTemp),
+    From = binary_to_list(ToTemp),
+    convert(From,To,Value);
+
+convert(FromTemp,ToTemp,Value) when is_list(FromTemp) and is_list(ToTemp) ->
+    To = list_to_atom(ToTemp),
+    From = list_to_atom(FromTemp),
+    convert(From,To,Value);
+
 convert(FromTemp,ToTemp,Value) ->
     To = list_to_atom(ToTemp),
     From = list_to_atom(FromTemp),
@@ -41,6 +55,7 @@ convert(FromTemp,ToTemp,Value) ->
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+
 convert_celcius(To,Value) ->
     case To of
 	celcius ->
