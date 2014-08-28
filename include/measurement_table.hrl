@@ -199,7 +199,7 @@
 	 {"Rupees","Sri Lanka Rupees","Sri LKR",forex,undefined},
 	 {"Dollars","Liberia Dollars","Dollars LRD",forex,undefined},
 	 {"Maloti","Lesotho Maloti","Maloti LSL",forex,undefined},
-	 {"Litai","Lithuania Litai","Litai LTL",forex.undefined},
+	 {"Litai","Lithuania Litai","Litai LTL",forex,undefined},
 	 {"Lati","Latvia Lati","LVL",forex,undefined},
 	 {"Dinars","Lati Libya, Dinars","LYD",forex,undefined},
 	 {"Dirhams","Morocco Dirhams","Morocco MAD",forex,undefined},
